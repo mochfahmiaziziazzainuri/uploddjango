@@ -1,0 +1,60 @@
+{% extends "data/main.html" %} 
+{% block content %} 
+{%include "data/status.html"%}
+  <br />
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-5">
+        <h5>custumer</h5>
+        <br />
+        <div class="card card-body">
+          <a class="btn btn-primary btn-sm btn-block" href="">create custumer</a>
+    <table class="table table-sm">
+      <tr>
+        <th>Action</th>
+        <th>Custumer</th>
+        <th>Phone</th>
+      </tr>
+      {% for datacustumer in custumer%}
+        <tr>
+          <td><a href="{% url 'custumer' datacustumer.id %}" class="btn btn-outline-success btn-sm">Views</a></td>
+          <td>{{ datacustumer.name }}</td>
+          <td>{{ datacustumer.phone }}</td>
+        </tr>
+      {% endfor %}
+    </table>      
+        </div>
+      </div>
+      <div class="col-md-7">
+        <h5>last 5 orders</h5>
+        <hr />
+        <div class="card card-body">
+          <a class="btn btn-primary btn-sm btn-block" href="{% url 'create_order' %}">create orders</a>
+          <table class="table table-sm">
+            <tr>
+              <th>product</th>
+              <th>date orders</th>
+              <th>status</th>
+              <th>update</th>
+              <th>remove</th>
+            </tr>
+        {% for dataorder in order %}
+          <tr>
+            <td>{{ dataorder.product }}</td>
+            <td>
+              {{ dataorder.date_created|date:"l, d N Y" }}
+              {{ dataorder.date_created|time:"H:i:s" }}
+            </td>
+            </td>
+            <td>{{ dataorder.status }}</td>
+            <td><a href="{% url 'update_order' dataorder.id %}" class="btn btn-success">Update</a></td>
+            <td><a href="{% url 'delete_order' dataorder.id %}" class="btn btn-danger">Delete</a></td>
+        {% endfor %}    
+          </tr>    
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}

@@ -1,0 +1,71 @@
+{% extends "data/main.html" %} {% block content %}
+
+<br />
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card card-body">
+        <h5>custumer</h5>
+        <hr />
+        <a class="btn btn-outline-info btn-sm btn-block" href >update custumer</a
+        >
+        <a class="btn btn-outline-danger btn-sm btn-block" href="" >delete custumer</a
+        >
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card card-body">
+        <h5>contact information</h5>
+        <hr />
+        <p>email: {{ custumer.email }}</p>
+        <p>phone: {{ custumer.phone }}</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card card-body">
+        <h5>total orders</h5>
+        <hr />
+        <h1 style="text-align: center; padding: 10px">{{ data_total_custumer }}</h1>
+      </div>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col">
+      <div class="card card-body">
+        <form method="get">
+          <button class="btn btn-primary" type="submit">search</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-md">
+      <div class="card card-body">
+        <table class="table table-sm">
+          <tr>
+            <th>products</th>
+            <th>category</th>
+            <th>date orderd</th>
+            <th>status</th>
+            <th>update</th>
+            <th>remove</th>
+          </tr>
+          {% for tampil_order_custumer in data_order_custumer %}
+             <tr>
+              <td>{{ tampil_order_custumer.product }}</td>
+              <td>{{ tampil_order_custumer.product.category }}</td>
+              <td>{{ tampil_order_custumer.date_created|date:"I, d N Y" }}</td>
+              <td>{{ tampil_order_custumer.status }}</td>
+              <td><a href="{% url 'update_order' tampil_order_custumer.id %}" class="btn btn-success">update</a></td>
+              <td><a href="{% url 'delete_order' tampil_order_custumer.id %}" class="btn btn-danger">delete</a></td>
+             </tr>
+             {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
